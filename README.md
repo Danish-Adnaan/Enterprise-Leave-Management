@@ -105,10 +105,7 @@ JWT_SECRET = your_jwt_secret_key
 ```
 
 ### **4. Initialize Database Schema**
-Run your PostgreSQL client and execute the necessary table definitions (`users`, `leaves`, `leave_cancellation_requests`), followed by the migration script:
-```bash
-psql -h localhost -U postgres -d enterprise_leave_management -f backend/migrations/001_leave_review_metadata.sql
-```
+Run your PostgreSQL client and execute the necessary table definitions (`users`, `leaves`, `leave_cancellation_requests`)
 
 ### **5. Run the Application**
 Start the backend API server:
