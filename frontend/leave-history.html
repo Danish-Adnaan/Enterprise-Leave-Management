@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave History | Leave Management</title>
+    <link rel="stylesheet" href="employee.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <header class="topbar">
+            <h2 class="app-title">Leave Management</h2>
+            <div class="profile-dropdown">
+                <button type="button" id="profileMenuButton" class="profile-btn">
+                    <span id="employeeName">Employee</span>
+                    <svg class="dropdown-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                    </svg>
+                </button>
+                <div id="profileMenu" class="dropdown-menu hidden">
+                    <a href="employee.html" class="dropdown-item">Dashboard</a>
+                    <a href="apply-leave.html" class="dropdown-item">Apply Leave</a>
+                    <a href="profile.html" class="dropdown-item">My Profile</a>
+                    <button type="button" id="dropdownLogoutButton" class="dropdown-item">Log Out</button>
+                </div>
+            </div>
+        </header>
+
+        <aside class="sidebar">
+            <nav aria-label="Employee navigation">
+                <a href="employee.html" class="nav-link">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
+                    Dashboard
+                </a>
+                <a href="leave-history.html" class="nav-link active">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 00-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/></svg>
+                    Leave History
+                </a>
+                <a href="apply-leave.html" class="nav-link">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1z"/></svg>
+                    Apply Leave
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/></svg>
+                    My Profile
+                </a>
+            </nav>
+        </aside>
+
+        <main class="dashboard-main">
+            <section class="welcome-section">
+                <h1>Leave History</h1>
+                <p>Review all of your leave requests and their current status</p>
+            </section>
+
+            <section class="content-card leave-history-card">
+                <div class="card-header">
+                    <div>
+                        <h2>All Leave Requests</h2>
+                        <p id="leaveMessage" role="status" aria-live="polite"></p>
+                    </div>
+                    <button type="button" id="refreshHistoryButton" class="secondary-button">Refresh</button>
+                </div>
+                <div id="leaveHistory" class="leave-history-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="leaveDetailOverlay" class="overlay hidden">
+        <div class="overlay-backdrop"></div>
+        <div class="overlay-content">
+            <div class="overlay-header">
+                <h3>Leave Details</h3>
+                <button type="button" class="overlay-close" id="closeOverlay" aria-label="Close details">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414l-2.879 2.879 2.879 2.879a1 1 0 01-1.414 1.414L10 11.414l-2.879 2.879a1 1 0 01-1.414-1.414L8.586 10 5.707 7.121a1 1 0 010-1.414z"/></svg>
+                </button>
+            </div>
+            <div id="leaveDetailContent" class="overlay-body"></div>
+        </div>
+    </div>
+
+    <script src="leave-history.js"></script>
+</body>
+</html>

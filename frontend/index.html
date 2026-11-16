@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enterprise Leave Management</title>
+    <link rel="stylesheet" href="employee.css">
+  </head>
+  <body class="login-page">
+    <main class="login-container">
+      <section class="login-card">
+        <header class ="login-header">
+          <h1 class="title">Enterprise Leave Management</h1>
+          <p>Sign in to manage your leave activities</p>
+        </header>
+
+        <form id="LoginForm"> 
+
+          <fieldset class="role-selector">
+            <legend>Select your role</legend>
+            <label> <input type="radio" name="role" id="employee" value="employee" required>Employee</label>
+            <label> <input type="radio" name="role" id="manager" value="manager" required>Manager</label>
+          </fieldset>
+
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter your username" autocomplete="username" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password" autocomplete="current-password" required>
+          </div>
+
+          <button type="submit" class="primary-button login-button">Login</button>
+        </form>
+      </section>
+
+      <p class="login-footer">Enterprise Leave Management System</p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+
+</html>

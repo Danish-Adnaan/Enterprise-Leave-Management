@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard | Enterprise Leave Management</title>
+    <link rel="stylesheet" href="employee.css">
+    <link rel="stylesheet" href="manager.css">
+</head>
+<body class="manager-page">
+
+    <aside class="manager-sidebar">
+        <a href="manager.html" class="brand">
+            <span class="brand-icon">EL</span>
+            <span>
+                <strong>Leave Management</strong>
+                <small>MANAGER WORKSPACE</small>
+            </span>
+        </a>
+
+        <p class="sidebar-label">WORKSPACE</p>
+
+        <nav class="manager-nav" aria-label="Manager navigation">
+            <button type="button" class="nav-item active"
+                    data-section="overviewSection">
+                <span class="nav-icon">▦</span> Overview
+            </button>
+
+            <button type="button" class="nav-item"
+                    data-section="usersSection">
+                <span class="nav-icon">♙</span> User Management
+            </button>
+
+            <button type="button" class="nav-item"
+                    data-section="leavesSection">
+                <span class="nav-icon">▣</span> Leave Requests
+            </button>
+
+            <button type="button" class="nav-item"
+                    data-section="cancellationsSection">
+                <span class="nav-icon">↶</span> Cancellation Requests
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-user">
+                <div class="user-avatar">M</div>
+                <div class="sidebar-user-info">
+                    <strong id="managerSidebarUsername">Manager</strong>
+                    <small>Manager account</small>
+                </div>
+            </div>
+
+            <button type="button" id="logoutButton" class="logout-button">
+                ↪ Logout
+            </button>
+        </div>
+    </aside>
+
+    <main class="manager-main">
+
+        <header class="main-header">
+            <div>
+                <p class="eyebrow">ENTERPRISE LEAVE MANAGEMENT</p>
+                <h1 id="pageTitle">Overview</h1>
+                <p id="pageSubtitle">
+                    Monitor employee leave usage and pending requests.
+                </p>
+            </div>
+            <div class="header-account">
+                <span class="status-dot"></span>
+                Manager Portal
+            </div>
+        </header>
+
+        <!-- Overview -->
+        <section id="overviewSection" class="manager-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Leave Overview</h2>
+                    <p>
+                        Approved leave days by employee for
+                        <strong id="summaryYear">the current year</strong>.
+                    </p>
+                </div>
+                <button type="button" id="refreshOverviewButton"
+                        class="secondary-button">
+                    Refresh data
+                </button>
+            </div>
+
+            <div class="summary-cards">
+                <article class="summary-card">
+                    <div class="summary-card-icon blue">♙</div>
+                    <div>
+                        <p>Active Users</p>
+                        <h3 id="activeUsersCount">—</h3>
+                    </div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="summary-card-icon amber">◷</div>
+                    <div>
+                        <p>Pending Leave Requests</p>
+                        <h3 id="pendingLeavesCount">—</h3>
+                    </div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="summary-card-icon purple">▦</div>
+                    <div>
+                        <p>Employees with Leave</p>
+                        <h3 id="employeesWithLeaveCount">—</h3>
+                    </div>
+                </article>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Employee Leave Counts</h2>
+                        <p>
+                            Ranked by total approved leave days.
+                            Ties share the same rank.
+                        </p>
+                    </div>
+
+                    <label class="sort-control" for="leaveSort">
+                        Sort by
+                        <select id="leaveSort">
+                            <option value="total">Total leave days</option>
+                            <option value="annual">Annual leave</option>
+                            <option value="casual">Casual leave</option>
+                            <option value="sick">Sick leave</option>
+                            <option value="personal">Personal leave</option>
+                            <option value="username">Employee name</option>
+                        </select>
+                    </label>
+                </div>
+
+                <p id="overviewMessage" class="status-message"
+                   role="status" aria-live="polite"></p>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Employee</th>
+                                <th>Annual</th>
+                                <th>Casual</th>
+                                <th>Sick</th>
+                                <th>Personal</th>
+                                <th>Total Days</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaveSummaryTableBody">
+                            <tr>
+                                <td colspan="7" class="empty-cell">
+                                    Leave summary will appear here once connected.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Management -->
+        <section id="usersSection" class="manager-section" hidden>
+            <div class="section-heading">
+                <div>
+                    <h2>User Management</h2>
+                    <p>View and manage employees and managers.</p>
+                </div>
+                <button type="button" id="showCreateUserButton">
+                    Create User
+                </button>
+            </div>
+
+            <form id="createUserForm" hidden>
+                <h3>Create a User</h3>
+
+                <div class="form-group">
+                    <label for="newUsername">Username</label>
+                    <input type="text" id="newUsername"
+                           maxlength="255" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="newUserRole">Role</label>
+                    <select id="newUserRole" required>
+                        <option value="employee">Employee</option>
+                        <option value="manager">Manager</option>
+                    </select>
+                </div>
+
+                <button type="submit">Create User</button>
+                <button type="button" id="cancelCreateUserButton"
+                        class="secondary-button">Cancel</button>
+                <p id="createUserMessage" role="status"></p>
+            </form>
+
+            <div id="generatedCredentials" class="credentials-panel" hidden>
+                <h3>User Created Successfully</h3>
+                <p>Share these credentials securely with the new user.</p>
+                <p>Username: <strong id="createdUsername"></strong></p>
+                <p>Default password: <strong id="createdPassword"></strong></p>
+                <button type="button" id="copyCredentialsButton">
+                    Copy Credentials
+                </button>
+                <button type="button" id="dismissCredentialsButton"
+                        class="secondary-button">Dismiss</button>
+            </div>
+
+            <p id="usersMessage" class="status-message" role="status"></p>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Created</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Leave Requests -->
+        <section id="leavesSection" class="manager-section" hidden>
+            <div class="section-heading">
+                <div>
+                    <h2>Pending Leave Requests</h2>
+                    <p>Review employee leave applications.</p>
+                </div>
+                <button type="button" id="refreshLeavesButton"
+                        class="secondary-button">Refresh</button>
+            </div>
+
+            <p id="leavesMessage" class="status-message" role="status"></p>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Leave Type</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Total Days</th>
+                            <th>Reason</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leavesTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <div id="leaveReviewModal" class="manager-modal" hidden>
+            <div class="manager-modal-backdrop"></div>
+            <div class="manager-modal-content">
+                <div class="manager-modal-header">
+                    <div>
+                        <span class="modal-kicker">LEAVE REVIEW</span>
+                        <h2 id="leaveReviewTitle">Leave request</h2>
+                    </div>
+                    <button type="button" id="closeLeaveReviewButton" class="modal-close">×</button>
+                </div>
+                <div id="leaveReviewBody" class="manager-modal-body"></div>
+            </div>
+        </div>
+
+        <!-- Cancellation Requests -->
+        <section id="cancellationsSection" class="manager-section" hidden>
+            <div class="section-heading">
+                <div>
+                    <h2>Pending Cancellation Requests</h2>
+                    <p>Review requests to cancel existing leave.</p>
+                </div>
+                <button type="button" id="refreshCancellationsButton"
+                        class="secondary-button">Refresh</button>
+            </div>
+
+            <p id="cancellationsMessage" class="status-message"
+               role="status"></p>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Leave Type</th>
+                            <th>Leave ID</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Total Days</th>
+                            <th>Leave Reason</th>
+                            <th>Cancellation Reason</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cancellationsTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="manager.js"></script>
+</body>
+</html>
